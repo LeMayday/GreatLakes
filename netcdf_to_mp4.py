@@ -36,8 +36,8 @@ for var in variables:
         file = '%s/geyser.out2.00%s.nc' %(nc_dir, num)
         nc_file = netCDF4.Dataset(file)
 
-        fig,ax=plt.subplots(figsize=(4.5,6)) # adjust image aspect to your data
-        img=ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower')
+        fig,ax = plt.subplots(figsize=(4.5,6)) # adjust image aspect to your data
+        img = ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower')
         cbar = fig.colorbar(img)
         unit = units[variables.index(var)]
         ax.set_title(var + (' (' + unit + ')' if unit != '' else ''))
