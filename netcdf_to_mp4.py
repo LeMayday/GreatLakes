@@ -32,6 +32,9 @@ units = units2 + units3
 fourcc = cv2.VideoWriter_fourcc(*'mp4v') # mp4 codec
 
 for var in variables:
+    # comment in if you want to play around with different temp mins/maxes
+    #if var != 'temp':
+    #    continue
     output_gif = './geyser_%s.gif' %var # output gif file
     output_mp4 = './geyser_%s.mp4' %var # output mp4 file
     filenames = []
@@ -45,7 +48,11 @@ for var in variables:
 
         # plot image
         fig,ax = plt.subplots(figsize=(4.5,6)) # adjust image aspect to your data
-        img = ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower')
+        # temp data seems to fluctuate more wildly than others, so it is given explicit bounds
+        if var == 'temp':
+            img = ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower', vmin=220, vmax=340)
+        else:
+            img = ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower')
         cbar = fig.colorbar(img)
         unit = units[variables.index(var)]
         ax.set_title(var + (' (' + unit + ')' if unit != '' else ''))
