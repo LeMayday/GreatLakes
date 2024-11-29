@@ -39,7 +39,8 @@ for var in variables:
         fig,ax=plt.subplots(figsize=(4.5,6)) # adjust image aspect to your data
         img=ax.imshow(nc_file[var][0,:,:,0], cmap='jet', origin='lower')
         cbar = fig.colorbar(img)
-        ax.set_title(var + ' (' + units[variables.index(var)] + ')')
+        unit = units[variables.index(var)]
+        ax.set_title(var + (' (' + unit + ')' if unit != '' else ''))
         ax.tick_params(axis='x', colors='white')
         ax.tick_params(axis='y', colors='white')
 
