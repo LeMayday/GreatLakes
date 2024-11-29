@@ -157,6 +157,7 @@ cython_debug/
 *.mp4
 *.gif
 *.nc
+*.inp
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
