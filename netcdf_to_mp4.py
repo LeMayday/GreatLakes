@@ -23,8 +23,13 @@ filenums = range(201)
 # add leading zeros
 filenums = [str(item).zfill(3) for item in filenums]
 # variables of interest
-variables = ['rho', 'press', 'vel1', 'vel2', 'r0', 'vapor1']
-units = ['kg/m^3', 'Pa', 'm/s', 'm/s', '', ''] # r0 and vapor1 are ratios
+variables2 = ['rho', 'press', 'vel1', 'vel2', 'r0', 'vapor1']
+units2 = ['kg/m^3', 'Pa', 'm/s', 'm/s', '', ''] # r0 and vapor1 are ratios
+variables3 = ['temp', 'h2o', 'h2oc', 'co2', 'co2c']
+units3 = ['K', '', '', '', '']
+
+variables = variables2 + variables3
+units = units2 + units3
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
@@ -33,7 +38,10 @@ for var in variables:
     output_mp4 = './geyser_%s.mp4' %var # output mp4 file
     filenames = []
     for num in filenums:
-        file = '%s/geyser.out2.00%s.nc' %(nc_dir, num)
+        if var in variables2:
+            file = '%s/geyser.out2.00%s.nc' %(nc_dir, num)
+        elif var in variables3:
+            file = '%s/geyser.out3.00%s.nc' %(nc_dir, num)
         nc_file = netCDF4.Dataset(file)
 
         fig,ax = plt.subplots(figsize=(4.5,6)) # adjust image aspect to your data
